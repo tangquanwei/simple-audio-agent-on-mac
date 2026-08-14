@@ -183,9 +183,9 @@ Pass `--port 7861`, or find the stale process with `lsof -nP -iTCP:7860 -sTCP:LI
 - [x] Stage-by-stage verification of STT / LLM / TTS
 - [x] Full loop: record → STT → LLM → TTS → playback
 - [x] Real-time WebUI (WebSocket streaming + auto-segmentation)
-- [ ] Barge-in: detect the user interrupting during playback
-- [ ] Streaming TTS (`stream=True`) for lower time-to-first-audio
-- [ ] CustomVoice model: more voices and emotion instructions
+- [ ] Barge-in: detect the user interrupting during playback ([#1](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/1))
+- [ ] Streaming TTS (`stream=True`) for lower time-to-first-audio ([#2](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/2))
+- [ ] CustomVoice model: more voices and emotion instructions ([#3](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/3))
 
 ---
 

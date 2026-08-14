@@ -183,9 +183,9 @@ Qwen3 默认输出 `<think>` 推理内容，saam 已通过 `enable_thinking=Fals
 - [x] STT / LLM / TTS 分步验证
 - [x] 串联：录音 → STT → LLM → TTS → 播放，循环对话
 - [x] 实时 WebUI（WebSocket 流式 + 自动切段）
-- [ ] barge-in：播放回复时检测用户打断
-- [ ] TTS 边生成边播放（`stream=True`），降低首音延迟
-- [ ] CustomVoice 模型：更多音色与情感指令
+- [ ] barge-in：播放回复时检测用户打断（[#1](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/1)）
+- [ ] TTS 边生成边播放（`stream=True`），降低首音延迟（[#2](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/2)）
+- [ ] CustomVoice 模型：更多音色与情感指令（[#3](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/3)）
 
 ---
 

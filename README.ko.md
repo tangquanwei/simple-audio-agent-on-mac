@@ -183,9 +183,9 @@ Qwen3는 기본적으로 `<think>` 추론을 출력하지만, saam은 `enable_th
 - [x] STT / LLM / TTS 단계별 검증
 - [x] 통합: 녹음 → STT → LLM → TTS → 재생 루프 대화
 - [x] 실시간 WebUI (WebSocket 스트리밍 + 자동 분할)
-- [ ] barge-in: 응답 재생 중 사용자 끼어들기 감지
-- [ ] TTS 생성과 동시에 재생(`stream=True`)으로 첫 음 지연 단축
-- [ ] CustomVoice 모델: 더 다양한 음색과 감정 지시
+- [ ] barge-in: 응답 재생 중 사용자 끼어들기 감지 ([#1](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/1))
+- [ ] TTS 생성과 동시에 재생(`stream=True`)으로 첫 음 지연 단축 ([#2](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/2))
+- [ ] CustomVoice 모델: 더 다양한 음색과 감정 지시 ([#3](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/3))
 
 ---
 

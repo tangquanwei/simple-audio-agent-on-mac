@@ -183,9 +183,9 @@ Qwen3 はデフォルトで `<think>` 推論を出力しますが、saam は `en
 - [x] STT / LLM / TTS のステップごとの検証
 - [x] 統合：録音 → STT → LLM → TTS → 再生のループ会話
 - [x] リアルタイム WebUI（WebSocket ストリーミング + 自動セグメント）
-- [ ] barge-in：応答再生中のユーザー割り込み検出
-- [ ] TTS の生成しながら再生（`stream=True`）で初音レイテンシを削減
-- [ ] CustomVoice モデル：より多くの声と感情指示
+- [ ] barge-in：応答再生中のユーザー割り込み検出（[#1](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/1)）
+- [ ] TTS の生成しながら再生（`stream=True`）で初音レイテンシを削減（[#2](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/2)）
+- [ ] CustomVoice モデル：より多くの声と感情指示（[#3](https://github.com/tangquanwei/simple-audio-agent-on-mac/issues/3)）
 
 ---
 
