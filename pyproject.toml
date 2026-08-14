@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "saam"
+version = "0.1.0"
+description = "Simple Audio Agent on Mac: fully local speech-to-speech with MLX"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12,<3.14"
+authors = [{ name = "tangquanwei" }]
+keywords = ["mlx", "speech-to-speech", "voice-assistant", "apple-silicon"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+dependencies = [
+    "mlx-whisper",
+    "mlx-lm",
+    "mlx-audio",
+    "silero-vad",
+    "onnxruntime",
+    "sounddevice",
+    "soundfile",
+    "numpy",
+    "fastapi",
+    "uvicorn",
+    "websockets",
+]
+
+[project.urls]
+Homepage = "https://github.com/tangquanwei/simple-audio-agent-on-mac"
+Issues = "https://github.com/tangquanwei/simple-audio-agent-on-mac/issues"
+
+[project.scripts]
+saam = "main:main"
+saam-web = "webui:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["saam"]
+py-modules = ["main", "webui"]

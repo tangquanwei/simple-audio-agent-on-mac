@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: |
+          uv venv --python 3.12 .venv
+          uv pip install --python .venv/bin/python -e .
+
+      - name: Compile all sources
+        run: .venv/bin/python -m compileall -q main.py webui.py saam scripts
+
+      - name: Import check (no model downloads)
+        run: |
+          .venv/bin/python -c "
+          from saam.vad import VADSegmenter, MicVAD
+          from saam.stt import STT
+          from saam.llm import LLM
+          from saam.tts import TTS
+          import main, webui
+          print('imports ok')"
+
+      - name: CLI entry points
+        run: |
+          .venv/bin/saam --help > /dev/null
+          .venv/bin/saam-web --help > /dev/null

@@ -9,6 +9,8 @@
 [![STT](https://img.shields.io/badge/STT-Whisper%20large--v3--turbo-74aa9c)](https://huggingface.co/mlx-community/whisper-large-v3-turbo)
 [![LLM](https://img.shields.io/badge/LLM-Qwen3--0.6B--4bit-6E4AFF)](https://huggingface.co/mlx-community/Qwen3-0.6B-4bit)
 [![TTS](https://img.shields.io/badge/TTS-Qwen3--TTS%200.6B-FF6F61)](https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit)
+[![CI](https://github.com/tangquanwei/simple-audio-agent-on-mac/actions/workflows/ci.yml/badge.svg)](https://github.com/tangquanwei/simple-audio-agent-on-mac/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 🗣️ 話す → 🤖 考える → 🔊 答える · **クラウド不要、API キー不要、サブスク不要**
 
@@ -103,6 +105,8 @@ uv pip install --python .venv/bin/python -r requirements.txt
 
 話す → 文字起こし → 応答を表示 → 音声再生、のループ。`Ctrl+C` で終了。
 
+コマンドとしてインストールもできます —— `uv pip install --python .venv/bin/python -e .` —— 以降は `saam`（CLI）/ `saam-web`（WebUI）で起動できます。
+
 <details>
 <summary>⚙️ オプション（webui.py と main.py 共通）</summary>
 
@@ -154,6 +158,23 @@ requirements.txt     # 固定された依存関係（uv pip freeze）
 > 実践で見つかった 2 つの落とし穴は本プロジェクトで解決済みです：Qwen3 はデフォルトで `<think>` 推論過程を出力します（TTS が思考内容まで読み上げてしまう）が、`enable_thinking=False` で無効化。lightning-whisper-mlx 0.0.10 は mlx 0.32 と非互換のため、STT には公式メンテナンスの mlx-whisper を採用しています。
 
 参考プロジェクト：[huggingface/speech-to-speech](https://github.com/huggingface/speech-to-speech)
+
+## ❓ よくある質問
+
+**対応言語は？**
+認識側の Whisper は多言語対応です —— `--language en`、`ja`、`ko` などで切り替え（デフォルト `zh`）。LLM（Qwen3）と Qwen3-TTS は中国語・英語が最も安定しています。
+
+**エージェントが「思考内容」まで読み上げる。**
+Qwen3 はデフォルトで `<think>` 推論を出力しますが、saam は `enable_thinking=False` で無効化済みです。他の推論モデルに差し替える場合は、TTS に渡す前に思考タグを除去してください。
+
+**初回実行がとても遅い。**
+初回のみモデル（約 3GB）をダウンロードするためです。以降の起動は数秒です。HuggingFace が遅い場合は `HF_ENDPOINT=https://hf-mirror.com` を試してください。
+
+**マイクが反応しない。**
+システム設定 → プライバシーとセキュリティ → マイク でターミナルとブラウザを許可してください。ブラウザのマイク利用は `localhost` / `127.0.0.1`（または HTTPS）でのアクセスが必須です。
+
+**ポート 7860 が "Address already in use"？**
+`--port 7861` で変更するか、`lsof -nP -iTCP:7860 -sTCP:LISTEN` で残留プロセスを確認してください。
 
 ## 🗺️ ロードマップ
 

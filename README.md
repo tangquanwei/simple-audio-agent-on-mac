@@ -9,6 +9,8 @@
 [![STT](https://img.shields.io/badge/STT-Whisper%20large--v3--turbo-74aa9c)](https://huggingface.co/mlx-community/whisper-large-v3-turbo)
 [![LLM](https://img.shields.io/badge/LLM-Qwen3--0.6B--4bit-6E4AFF)](https://huggingface.co/mlx-community/Qwen3-0.6B-4bit)
 [![TTS](https://img.shields.io/badge/TTS-Qwen3--TTS%200.6B-FF6F61)](https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit)
+[![CI](https://github.com/tangquanwei/simple-audio-agent-on-mac/actions/workflows/ci.yml/badge.svg)](https://github.com/tangquanwei/simple-audio-agent-on-mac/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 🗣️ Speak → 🤖 Think → 🔊 Answer · **No cloud, no API keys, no subscriptions**
 
@@ -103,6 +105,8 @@ Multiple browser connections are supported; inference requests are queued.
 
 Speak → transcribe → print the reply → play the voice, in a loop. `Ctrl+C` to quit.
 
+Or install the entry points once — `uv pip install --python .venv/bin/python -e .` — then just run `saam` (CLI) or `saam-web` (WebUI).
+
 <details>
 <summary>⚙️ Options (shared by webui.py and main.py)</summary>
 
@@ -154,6 +158,23 @@ requirements.txt     # Pinned dependencies (uv pip freeze)
 > Two real-world pitfalls already solved here: Qwen3 emits its `<think>` reasoning by default (the TTS would read the thinking out loud) — disabled via `enable_thinking=False`. And lightning-whisper-mlx 0.0.10 is incompatible with mlx 0.32, so STT uses the officially maintained mlx-whisper instead.
 
 Inspired by [huggingface/speech-to-speech](https://github.com/huggingface/speech-to-speech).
+
+## ❓ FAQ
+
+**Which languages are supported?**
+Recognition is multilingual via Whisper — pass `--language en`, `ja`, `ko`, etc. (default `zh`). The Qwen3 LLM and Qwen3-TTS handle Chinese and English best.
+
+**The agent reads its "thinking" out loud.**
+Qwen3 emits `<think>` reasoning by default; saam disables it with `enable_thinking=False`. If you swap in another reasoning model, strip its thinking tags before TTS.
+
+**The first run is very slow.**
+That's the one-time model download (~3GB); afterwards startup takes seconds. If HuggingFace is slow where you are, try `HF_ENDPOINT=https://hf-mirror.com`.
+
+**The microphone doesn't respond.**
+Grant access in System Settings → Privacy & Security → Microphone for your terminal and browser. In the browser, mic capture requires `localhost` / `127.0.0.1` (or HTTPS).
+
+**"Address already in use" on port 7860?**
+Pass `--port 7861`, or find the stale process with `lsof -nP -iTCP:7860 -sTCP:LISTEN`.
 
 ## 🗺️ Roadmap
 

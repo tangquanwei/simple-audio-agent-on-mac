@@ -9,6 +9,8 @@
 [![STT](https://img.shields.io/badge/STT-Whisper%20large--v3--turbo-74aa9c)](https://huggingface.co/mlx-community/whisper-large-v3-turbo)
 [![LLM](https://img.shields.io/badge/LLM-Qwen3--0.6B--4bit-6E4AFF)](https://huggingface.co/mlx-community/Qwen3-0.6B-4bit)
 [![TTS](https://img.shields.io/badge/TTS-Qwen3--TTS%200.6B-FF6F61)](https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit)
+[![CI](https://github.com/tangquanwei/simple-audio-agent-on-mac/actions/workflows/ci.yml/badge.svg)](https://github.com/tangquanwei/simple-audio-agent-on-mac/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 🗣️ 说话 → 🤖 思考 → 🔊 回答 · **零云端、零 API Key、零订阅**
 
@@ -103,6 +105,8 @@ uv pip install --python .venv/bin/python -r requirements.txt
 
 说话 → 自动转写 → 打印回复 → 播放语音，循环对话，`Ctrl+C` 退出。
 
+也可以先安装命令入口 —— `uv pip install --python .venv/bin/python -e .` —— 之后直接运行 `saam`（CLI）或 `saam-web`（WebUI）。
+
 <details>
 <summary>⚙️ 可选参数（webui.py 与 main.py 通用）</summary>
 
@@ -154,6 +158,23 @@ requirements.txt     # 锁定依赖（uv pip freeze）
 > 两个实践中的坑，已在本项目中解决：Qwen3 默认输出 `<think>` 推理过程（TTS 会把思考内容念出来），已通过 `enable_thinking=False` 关闭；lightning-whisper-mlx 0.0.10 与 mlx 0.32 不兼容，故 STT 采用官方维护的 mlx-whisper。
 
 参考项目：[huggingface/speech-to-speech](https://github.com/huggingface/speech-to-speech)
+
+## ❓ 常见问题
+
+**支持哪些语言？**
+识别端 Whisper 是多语言的 —— 用 `--language en`、`ja`、`ko` 等切换（默认 `zh`）。LLM（Qwen3）和 Qwen3-TTS 对中英文支持最好。
+
+**助手会把「思考过程」念出来。**
+Qwen3 默认输出 `<think>` 推理内容，saam 已通过 `enable_thinking=False` 关闭。如果自行更换其他推理模型，记得在送 TTS 前剥掉思考标签。
+
+**第一次运行很慢。**
+那是模型的一次性下载（约 3GB），之后启动只需几秒。HuggingFace 下载慢可以设 `HF_ENDPOINT=https://hf-mirror.com`。
+
+**麦克风没反应。**
+在 系统设置 → 隐私与安全性 → 麦克风 中允许终端和浏览器访问。浏览器录音要求用 `localhost` / `127.0.0.1`（或 HTTPS）访问页面。
+
+**7860 端口被占用？**
+换端口 `--port 7861`，或用 `lsof -nP -iTCP:7860 -sTCP:LISTEN` 找到残留进程。
 
 ## 🗺️ 路线图
 

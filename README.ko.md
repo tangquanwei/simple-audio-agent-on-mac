@@ -9,6 +9,8 @@
 [![STT](https://img.shields.io/badge/STT-Whisper%20large--v3--turbo-74aa9c)](https://huggingface.co/mlx-community/whisper-large-v3-turbo)
 [![LLM](https://img.shields.io/badge/LLM-Qwen3--0.6B--4bit-6E4AFF)](https://huggingface.co/mlx-community/Qwen3-0.6B-4bit)
 [![TTS](https://img.shields.io/badge/TTS-Qwen3--TTS%200.6B-FF6F61)](https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-0.6B-Base-8bit)
+[![CI](https://github.com/tangquanwei/simple-audio-agent-on-mac/actions/workflows/ci.yml/badge.svg)](https://github.com/tangquanwei/simple-audio-agent-on-mac/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 🗣️ 말하기 → 🤖 생각하기 → 🔊 대답하기 · **클라우드 없이, API 키 없이, 구독 없이**
 
@@ -103,6 +105,8 @@ uv pip install --python .venv/bin/python -r requirements.txt
 
 말하기 → 전사 → 응답 출력 → 음성 재생이 반복됩니다. `Ctrl+C`로 종료.
 
+명령어로 설치할 수도 있습니다 —— `uv pip install --python .venv/bin/python -e .` —— 이후 `saam`(CLI) / `saam-web`(WebUI)으로 실행하세요.
+
 <details>
 <summary>⚙️ 옵션 (webui.py와 main.py 공통)</summary>
 
@@ -154,6 +158,23 @@ requirements.txt     # 고정된 의존성 (uv pip freeze)
 > 실전에서 발견한 두 가지 함정은 이 프로젝트에서 이미 해결했습니다: Qwen3는 기본적으로 `<think>` 추론 과정을 출력합니다(TTS가 생각 내용까지 읽어버림) — `enable_thinking=False`로 비활성화. lightning-whisper-mlx 0.0.10은 mlx 0.32와 호환되지 않아 STT는 공식 유지 관리되는 mlx-whisper를 사용합니다.
 
 참고 프로젝트: [huggingface/speech-to-speech](https://github.com/huggingface/speech-to-speech)
+
+## ❓ 자주 묻는 질문
+
+**어떤 언어를 지원하나요?**
+인식 측 Whisper는 다국어를 지원합니다 — `--language en`, `ja`, `ko` 등으로 전환하세요(기본값 `zh`). LLM(Qwen3)과 Qwen3-TTS는 중국어·영어에서 가장 안정적입니다.
+
+**에이전트가 "생각 내용"까지 읽어요.**
+Qwen3는 기본적으로 `<think>` 추론을 출력하지만, saam은 `enable_thinking=False`로 비활성화했습니다. 다른 추론 모델로 교체할 경우 TTS에 전달하기 전에 생각 태그를 제거하세요.
+
+**첫 실행이 매우 느려요.**
+최초 한 번만 모델(약 3GB)을 다운로드하기 때문입니다. 이후 시작은 몇 초면 됩니다. HuggingFace가 느리면 `HF_ENDPOINT=https://hf-mirror.com`을 설정해 보세요.
+
+**마이크가 반응하지 않아요.**
+시스템 설정 → 개인 정보 보호 및 보안 → 마이크 에서 터미널과 브라우저를 허용하세요. 브라우저 마이크는 `localhost` / `127.0.0.1`(또는 HTTPS)로 접속해야 합니다.
+
+**7860 포트가 "Address already in use"?**
+`--port 7861`로 변경하거나 `lsof -nP -iTCP:7860 -sTCP:LISTEN`으로 남은 프로세스를 확인하세요.
 
 ## 🗺️ 로드맵
 
