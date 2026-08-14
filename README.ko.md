@@ -16,6 +16,8 @@
 
 [빠른 시작](#-빠른-시작) · [실시간 WebUI](#-실시간-webui) · [CLI](#-cli-대화) · [프로젝트 구조](#-프로젝트-구조) · [로드맵](#-로드맵)
 
+<img src="images/webui.png" alt="saam WebUI — 실시간 음성 대화" width="720">
+
 </div>
 
 ---

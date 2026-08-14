@@ -16,6 +16,8 @@ English · [中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어]
 
 [Quick Start](#-quick-start) · [Real-time WebUI](#-real-time-webui) · [CLI](#-cli-conversation) · [Project Layout](#-project-layout) · [Roadmap](#-roadmap)
 
+<img src="images/webui.png" alt="saam WebUI — real-time voice conversation" width="720">
+
 </div>
 
 ---
